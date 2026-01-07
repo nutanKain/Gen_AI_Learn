@@ -1,0 +1,218 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0; /* Important for flex scrolling */
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.message {
+  display: flex;
+  max-width: 75%; /* Consistent max width */
+  min-width: 0; /* Prevent overflow */
+  animation: fadeIn 0.3s ease-in;
+}
+
+.message.user {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  justify-content: flex-start;
+}
+
+.message-content {
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  word-wrap: break-word;
+  word-break: break-word; /* Better word breaking */
+  white-space: pre-wrap;
+  line-height: 1.5;
+  max-width: 100%; /* Ensure content doesn't overflow */
+  overflow-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message.assistant .message-content {
+  background: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-bottom-left-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.typing-indicator {
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #667eea;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-input-container {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  flex-shrink: 0; /* Prevent input from shrinking */
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 100%;
+  width: 100%; /* Ensure full width */
+}
+
+.chat-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 2rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  min-width: 0; /* Important for flex input */
+}
+
+.chat-input:focus {
+  border-color: #667eea;
+}
+
+.chat-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.send-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  min-width: 50px;
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.send-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.send-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chat-container {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .message {
+    max-width: 85%;
+  }
+}
